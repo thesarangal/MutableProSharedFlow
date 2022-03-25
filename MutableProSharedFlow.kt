@@ -157,14 +157,14 @@ class MutableProSharedFlow<T>(
      * ```
      */
     fun subscriptionCount() = flow.subscriptionCount
+}
 
-    /**
-     * Represents this mutable shared flow as a read-only shared flow.
-     * */
-    fun <T> SharedFlow<T>.getValue(defaultValue: T): T {
-        if (this is MutableProSharedFlow) {
-            return getValue()
-        }
-        return defaultValue
+/**
+ * Represents this mutable shared flow as a read-only shared flow.
+ * */
+fun <T> SharedFlow<T>.getValue(defaultValue: T): T {
+    if (this is MutableProSharedFlow) {
+        return getValue()
     }
+    return defaultValue
 }
