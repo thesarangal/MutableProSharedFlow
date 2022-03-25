@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.*
  *
  * @author Rajat Sarangal
  * @since March 25, 2022
+ * @link https://github.com/thesarangal/MutableProSharedFlow/blob/master/MutableProSharedFlow.kt
  */
 class MutableProSharedFlow<T>(
     private var initialValue: T,
