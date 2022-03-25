@@ -33,7 +33,11 @@ class MutableProSharedFlow<T>(
      */
     @InternalCoroutinesApi
     override suspend fun collect(collector: FlowCollector<T>) {
-        collector.emit(initialValue)
+
+        if(replayCache().isEmpty()){
+            collector.emit(initialValue)
+        }
+
         flow.collect(collector)
     }
 
@@ -130,6 +134,14 @@ class MutableProSharedFlow<T>(
      * @return Initial Value
      * */
     fun getValue(): T = initialValue
+
+    /**
+     * Resets the replayCache of this shared flow to an initial state
+     * */
+    fun reset(value: T) {
+        initialValue = value
+        flow.resetReplayCache()
+    }
 
     /**
      * A snapshot of the replay cache.
