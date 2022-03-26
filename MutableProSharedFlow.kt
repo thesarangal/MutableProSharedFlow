@@ -9,7 +9,8 @@ import kotlinx.coroutines.flow.*
  * See the [MutableSharedFlow] documentation for details on shared flows.
  *
  * @author Rajat Sarangal
- * @since March 25, 2022
+ * @since March 25, 2022 (Created)
+ * @since March 26, 2022 (Updated)
  * @link https://github.com/thesarangal/MutableProSharedFlow/blob/master/MutableProSharedFlow.kt
  */
 class MutableProSharedFlow<T>(
@@ -34,7 +35,7 @@ class MutableProSharedFlow<T>(
     @InternalCoroutinesApi
     override suspend fun collect(collector: FlowCollector<T>) {
 
-        if(replayCache().isEmpty()){
+        if (replayCache().isEmpty()) {
             collector.emit(initialValue)
         }
 
@@ -173,6 +174,16 @@ class MutableProSharedFlow<T>(
 
 /**
  * Represents this mutable shared flow as a read-only shared flow.
+ *
+ * To Use this extension: Implement like following
+ *
+ * private val _loadingStatus = MutableProSharedFlow(LoadingState.IDLE)
+ * val loadingStatus: SharedFlow<LoadingState> = _loadingStatus
+ *
+ * NOT Like:
+ *
+ * private val _loadingStatus = MutableProSharedFlow(LoadingState.IDLE)
+ * val loadingStatus = _loadingStatus.asSharedFlow()
  * */
 fun <T> SharedFlow<T>.getValue(defaultValue: T): T {
     if (this is MutableProSharedFlow) {
