@@ -139,6 +139,7 @@ class MutableProSharedFlow<T>(
     /**
      * Resets the replayCache of this shared flow to an initial state
      * */
+    @OptIn(ExperimentalCoroutinesApi::class)
     fun reset(value: T) {
         initialValue = value
         flow.resetReplayCache()
