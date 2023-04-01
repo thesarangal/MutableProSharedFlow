@@ -9,8 +9,7 @@ import kotlinx.coroutines.flow.*
  * See the [MutableSharedFlow] documentation for details on shared flows.
  *
  * @author Rajat Sarangal
- * @since March 25, 2022 (Created)
- * @since March 26, 2022 (Updated)
+ * @since April 01, 2023
  * @link https://github.com/thesarangal/MutableProSharedFlow/blob/master/MutableProSharedFlow.kt
  */
 class MutableProSharedFlow<T>(
@@ -33,7 +32,7 @@ class MutableProSharedFlow<T>(
      * of the developer mistakes related to concurrency, inconsistent flow dispatchers and cancellation.
      */
     @InternalCoroutinesApi
-    override suspend fun collect(collector: FlowCollector<T>) {
+    override suspend fun collect(collector: FlowCollector<T>): Nothing {
 
         if (replayCache().isEmpty()) {
             collector.emit(initialValue)
